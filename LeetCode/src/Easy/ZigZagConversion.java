@@ -16,7 +16,42 @@ convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
  */
 public class ZigZagConversion {
 	//init Code
-	 public String convert(String s, int numRows) {
-	        
+	 public static String convert(String s, int numRows) {
+		 char[] strArray = s.toCharArray();
+		 int length = strArray.length;
+		 if(numRows==1 || length<=numRows)
+			 return s;
+        int group = numRows*2-2;
+        
+        char[] zigZagStr = new char[length];
+        int index = 0;
+        int jumper =0;
+        while(jumper<length){
+        	zigZagStr[index] = strArray[jumper];
+        	jumper += group;
+        	index++;
+        }
+        
+        jumper=1;
+        int i=jumper;
+        while(i<numRows-1){
+        	while(i<length){
+        		zigZagStr[index] = strArray[i];
+            	i += numRows-1;
+            	index++;
+        	}
+        	jumper ++;
+        	i = jumper;
+        }
+        jumper = numRows-1;
+        while(jumper<length){
+        	zigZagStr[index] = strArray[jumper];
+        	jumper += group;
+        	index++;
+        }
+        return String.valueOf(zigZagStr);
 	 }
+	 public static void main(String[] args) {
+		System.out.println(convert("abcdefghijklmnopqrstuvwxyz", 6));
+	}
 }
