@@ -37,8 +37,13 @@ public class ZigZagConversion {
         while(i<numRows-1){
         	while(i<length){
         		zigZagStr[index] = strArray[i];
-            	i += numRows-1;
+            	i += 2*(numRows-jumper-1);
             	index++;
+            	if(i<length){
+	            	zigZagStr[index] = strArray[i];
+	            	i += 2*jumper;
+	            	index++;
+            	}
         	}
         	jumper ++;
         	i = jumper;
@@ -52,6 +57,6 @@ public class ZigZagConversion {
         return String.valueOf(zigZagStr);
 	 }
 	 public static void main(String[] args) {
-		System.out.println(convert("abcdefghijklmnopqrstuvwxyz", 6));
+		System.out.println(convert("ABCD", 3));
 	}
 }
